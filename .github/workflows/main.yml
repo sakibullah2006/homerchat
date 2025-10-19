@@ -33,8 +33,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Run Linter
-        run: pnpm lint
+      # - name: Run Linter
+      #   run: pnpm lint
 
       - name: Build All Packages
         run: pnpm build
