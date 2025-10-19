@@ -18,29 +18,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Sets up Node.js and enables pnpm caching for faster installs
-      - name: Setup Node.js and pnpm
+      # ⚙️ ADD THIS STEP to install the pnpm CLI
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Or your desired pnpm version
+
+      # Now, setup Node.js. It will find and use the pnpm you just installed.
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Or your preferred Node.js LTS version
-          cache: 'pnpm'
+          node-version: 20
+          cache: 'pnpm' # This caching will now work correctly
 
-      # 3. Installs project dependencies
       - name: Install Dependencies
         run: pnpm install
 
-      # 4. Runs the linter across the entire monorepo
       - name: Run Linter
         run: pnpm lint
 
-      # 5. Builds all apps and packages to ensure there are no compilation or type errors
       - name: Build All Packages
         run: pnpm build
 
-      # 6. Runs all unit and integration tests
       - name: Run Tests
         run: pnpm test
