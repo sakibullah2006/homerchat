@@ -4,7 +4,7 @@ import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient } from '@prisma/client';
 import { TRUSTEDORIGINS } from './trusted.origins';
 
-const prisma = new PrismaClient();
+const prisma: PrismaClient = new PrismaClient();
 
 export const auth = betterAuth({
   url: process.env.BETTER_AUTH_URL, // Used to build callback URLs & cookies
