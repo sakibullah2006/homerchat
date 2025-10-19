@@ -1,0 +1,43 @@
+# .github/workflows/ci.yml
+
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # ⚙️ FIX: Remove the explicit version line from this step.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # The 'with' block is now gone. The action will read the version
+        # from your package.json's "packageManager" field.
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Linter
+        run: pnpm lint
+
+      - name: Build All Packages
+        run: pnpm build
+
+      - name: Run Tests
+        run: pnpm test
