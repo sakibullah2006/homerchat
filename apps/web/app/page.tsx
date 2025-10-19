@@ -67,7 +67,7 @@ export default function Home() {
             <div className="text-5xl mb-4">✨</div>
             <h3 className="text-2xl font-bold text-white mb-3">Beautiful UI</h3>
             <p className="text-gray-400">
-              Stunning design that's both intuitive and delightful to use every day.
+              Stunning design that&apos;s both intuitive and delightful to use every day.
             </p>
           </div>
         </div>

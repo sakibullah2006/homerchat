@@ -1,3 +1,1 @@
-export const TRUSTEDORIGINS = [
-    'http://localhost:3000'
-]
+export const TRUSTEDORIGINS = ['http://localhost:3000'];

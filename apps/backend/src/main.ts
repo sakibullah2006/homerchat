@@ -4,14 +4,14 @@ import { TRUSTEDORIGINS } from './lib/trusted.origins';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    bodyParser: false
+    bodyParser: false,
   });
 
   app.enableCors({
     origin: [...TRUSTEDORIGINS],
-    Credential: true
-  })
+    credentials: true,
+  });
 
   await app.listen(process.env.PORT ?? 3001);
 }
-bootstrap();
+void bootstrap();
