@@ -3,6 +3,7 @@ import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient } from '@prisma/client';
 import { TRUSTEDORIGINS } from './trusted.origins';
+import { openAPI } from 'better-auth/plugins';
 
 const prisma = new PrismaClient();
 
@@ -15,7 +16,21 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'postgresql',
   }),
-  // Enable simple email+password to start. (We'll add OAuth/Passkeys later.)
+
   emailAndPassword: { enabled: true },
-  trustedOrigins: TRUSTEDORIGINS,
+
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // Cache duration in seconds
+    },
+  },
+
+  plugins: [
+    openAPI()
+  ],
+
+  trustedOrigins: [
+    ...TRUSTEDORIGINS
+  ],
 });
