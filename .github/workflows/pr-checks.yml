@@ -4,8 +4,7 @@ name: 'PR Checks: Lint & Build'
 
 on:
   pull_request:
-    branches:
-      - '**'
+    branches: [main]
 
 jobs:
   lint-and-build:
